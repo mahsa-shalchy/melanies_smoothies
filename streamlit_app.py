@@ -37,7 +37,7 @@ pd_df = my_dataframe.to_pandas()
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:',
-    my_dataframe,
+    pd_df['FRUIT_NAME'].tolist(),
     max_selections=5
 )
 
@@ -60,11 +60,9 @@ if ingredients_list:
 
     my_insert_stmt = f"""
         INSERT INTO smoothies.public.orders (ingredients, name_on_order)
-        VALUES ('""" + ingredients_string +  """',
-        '""" + name_on_order +  """')
+        VALUES ('{ingredients_string.strip()}', '{name_on_order}')
     """
 
- 
     
     # st.write( my_insert_stmt)
 
